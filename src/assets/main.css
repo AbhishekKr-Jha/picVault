@@ -2,7 +2,8 @@
 
 body{
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%;
+
 }
 
 .container{
@@ -54,3 +55,12 @@ button{
 .itemsC{align-items: center;}
 .w100{width: 100%;}
 .wrap{flex-wrap: wrap;}
+
+
+
+
+@media (max-width: 600px) {
+  .menuBox2 {
+ display: none;
+  }
+}

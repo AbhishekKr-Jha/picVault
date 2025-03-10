@@ -93,15 +93,11 @@ console.log("the view type is now",viewType)
 
 
 
-    <div :style="{right:showMenuOption?'100px':'-350px'}" class="menuBox flex flexC justifyC itemsC">
-<!-- <div class="menuBoxInner"> -->
+    <div :style="{right:showMenuOption?'10%':'-350px',}" class="menuBox flex flexC justifyC itemsC" :class="!showMenuOption && 'menuBox2'">
 <div @click="imageDisplayTypeFunc(0)" :class="['menuItem',imageViewType==0?'selectedItem':'unSelectedItem']">Grid</div>
 <div @click="imageDisplayTypeFunc(1)" :class="['menuItem',imageViewType==1?'selectedItem':'unSelectedItem']">List</div>
 <div @click="imageDisplayTypeFunc(2)" :class="['menuItem',imageViewType==2?'selectedItem':'unSelectedItem']">Slider</div>
 <div @click="imageDisplayTypeFunc(3)" :class="['menuItem',imageViewType==3?'selectedItem':'unSelectedItem']">Upload</div>
-<!-- </div> -->
-
-
     </div>
 
 <!-- <InputBox /> -->
@@ -112,8 +108,8 @@ console.log("the view type is now",viewType)
 <style>
 .menu {
   position: absolute;
-  top: 30px;
-  right: 100px;
+  top: 30px; 
+  right: 8%;  
   background-color: black;
   color: white;
   width: 60px;
@@ -124,6 +120,14 @@ console.log("the view type is now",viewType)
   align-items: center;
   cursor: pointer;
 }
+.menuV{
+  width: 250px;
+  display: flex;
+}
+.menuH{
+  width: 0px;
+  display: none;
+}
 .menu:hover {
   color: black;
   background: white;
@@ -133,13 +137,14 @@ console.log("the view type is now",viewType)
 .menuBox {
   position: absolute;
   top: 100px;
-  /* right: -100%; */
-width: 250px;
-border: 2px solid white;
+  /* right: -100%; */ 
+  width: 250px; 
+border: 2px solid white; 
 background: black;
 padding:5px;
 transition: all ease-in-out 0.5s;
 border-radius: 8px;
+overflow: hidden;
 }
 .menuItem{
   width:100%;
