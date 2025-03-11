@@ -98,7 +98,8 @@ console.log("the view type is now",viewType)
 <div  v-show="!loader" style="width:100%;">
   <div style="margin:10px 0px;" class="header">
       <!-- <h1>PicVault</h1> -->
-       <img @click="imageDisplayTypeFunc(0)" style="cursor: pointer;" class="logo" src="./components/icons/image.png" width="200px"  />
+<!-- --------------the logo has a width of 200px----------- -->
+       <img @click="imageDisplayTypeFunc(0)" style="cursor: pointer;" class="logo" src="./components/icons/image.png" width="170px"  /> 
           </div>
 
 

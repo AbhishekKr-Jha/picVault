@@ -88,7 +88,8 @@ imageClicked(imgItem){
 
 <style >
 .gridImageContainer{
-    column-width: 280px;
+    column-width: 221px;
+    /* column-width: 280px; */
     gap: 10px;
     /* background: yellow; */
     /* width: 100%; */
