@@ -60,7 +60,19 @@ imageClicked(imgItem){
 <template>
 <div class="gridImageContainer justifyC itemsC"  :style="{display:viewType==1?'flex':'block', flexDirection: viewType == 1 ? 'column' : 'row' }">
   <!-- width="40%"  style="max-width: 400px; -->
-<img style="padding:2px 0px;cursor: pointer;" class="image" v-show="viewType!==2 && viewType!==3" v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)" :src="ele?.src?.original"   />
+<!-- <img style="padding:2px 0px;cursor: pointer;" class="image" v-show="viewType!==2 && viewType!==3" v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)" :src="ele?.src?.original"   /> -->
+
+
+<div class="imageWrapper" v-show="viewType !== 2 && viewType !== 3" 
+       v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)">
+       
+    <img class="image" :src="ele?.src?.original" style="padding:2px 0px;cursor: pointer;" />
+    
+    <!-- <div class="imageOverlay"></div> -->
+
+  </div>
+
+
 
 <!-- <div v-show="viewType===2" style=""  class="sliderButton w100 flex itemsC justifyB">
 <button @click="slideBack()" type="button"><i class="ri-arrow-left-wide-line"></i></button>
@@ -99,4 +111,39 @@ img{
 /* .sliderImage{
   max-width: 600px;
 } */
+
+
+.imageWrapper {
+  position: relative;
+  border-radius: 12px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  transition: transform 0.3s ease-in;
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.28); 
+}
+
+.imageOverlay {
+  position: absolute;
+  bottom: -100%; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  transition: bottom 0.4s ease-in-out;
+}
+
+.imageWrapper:hover .imageOverlay {
+  bottom: 0; 
+}
+
+
+
 </style>

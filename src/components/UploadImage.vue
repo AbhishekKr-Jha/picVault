@@ -46,7 +46,6 @@ this.loader=false
     },
 deleteImage(id){
     let getImageList=JSON.parse(localStorage.getItem('imageList'))
-
     getImageList.splice(id,1)
     this.imageUrls=getImageList
     localStorage.setItem('imageList',JSON.stringify(getImageList))
@@ -65,24 +64,24 @@ deleteImage(id){
 
 
 <template>
-    <div>
+    <div v-show="!loader">
       <input type="file" @change="uploadImage" accept=".jpeg, .jpg, .png">
 
-<div style="margin: 20px 0;" class="flex wrap justifyC itemsC">
+<div style="margin: 20px 0;" class="flex wrap justifyC itemsC ">
     <div v-for="(item,index) in imageUrls" :key="index" style="max-width: 400px;width:90%;position:relative;">
         <img  :src="item" width="100%"  />
         <i @click="deleteImage(index)" class="ri-delete-bin-6-line deleteIcon"></i>
 
     </div>
     <p v-show="imageUrls.length==0" style="margin-top:30px; text-align:center;font-size:30px;color:black;">No images Yet! Upload it. <span style="font-size:50px">📸</span></p>
-
-    
-
 </div>
+ </div>
 
-<!-- <Loader :isLoading="loader" /> -->
+ <div v-show="loader" style="height: 80vh;" class="w100 flex flexC justifyC itemsC">
+  <div class="loader"></div> 
+  <p style="font-size: 20px;font-weight: 600;margin: 10px 0;">Uploading Image...</p>
+  </div>
 
-    </div>
 
   </template>
   
