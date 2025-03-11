@@ -5,6 +5,8 @@
  import InputBox from  './components/InputBox.vue'
  import SliderView from  './components/SliderView.vue'
  import Loader from  './components/Loader.vue'
+//  import CustomCursor from  './components/CustomCursor.vue'
+
 
 
 export default {
@@ -18,7 +20,10 @@ export default {
       showMenuOption:false,
       imageViewType:JSON.parse(localStorage.getItem('thePage')) || 0,
     loader:true,
-    isInputActive:false
+    isInputActive:false,
+    cursorX: 0,
+    cursorY: 0
+    
     };
   },
   components: {
@@ -27,9 +32,14 @@ export default {
     UploadImage,
     InputBox,
     SliderView,
-    Loader
+    Loader,
+    // CustomCursor
   },
   methods:{
+    updateCursor(event) {
+      this.cursorX = event.clientX;
+      this.cursorY = event.clientY;
+    },
     async fetchImageList(query="dragons"){
 
 this.loader=true
@@ -75,17 +85,20 @@ console.log("the view type is now",viewType)
   async created(){
     console.log("ok dom is crated")
        this.imageList=await this.fetchImageList()
+      //  this.$toast.success('You did it!');
   }
 };
 </script>
 
 <template>
-  <div class="container" :style="{ overflow: toggleZoom ? 'hidden' : 'auto'}">
+  <div @mousemove="updateCursor" class="container" :style="{ overflow: toggleZoom ? 'hidden' : 'auto'}">
+    <!-- <CustomCursor /> -->
+    <div class="customCursor" :style="{ top: cursorY + 'px', left: cursorX + 'px' }"></div>
     
 <div  v-show="!loader" style="width:100%;">
   <div style="margin:10px 0px;" class="header">
       <!-- <h1>PicVault</h1> -->
-       <img class="logo" src="./components/icons/image.png" width="200px"  />
+       <img @click="imageViewType=0" style="cursor: pointer;" class="logo" src="./components/icons/image.png" width="200px"  />
           </div>
 
 
@@ -111,6 +124,8 @@ console.log("the view type is now",viewType)
 <div v-show="imageViewType==3" class="">
   <UploadImage />
 </div>
+
+
 
     <div @click="showMenu" class="menu">
     <span v-show="!showMenuOption">Menu</span>

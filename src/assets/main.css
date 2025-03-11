@@ -3,7 +3,8 @@
 body{
   overflow-x: hidden;
   width: 100vw;
-  background: linear-gradient(45deg, white 30%, lightblue 70%, #00008B 80%);
+  /* background: linear-gradient(45deg, white 30%, lightblue 70%, #00008B 80%); */
+  background: linear-gradient(45deg,#00008B 10%, white 30%, lightblue 70%, #00008B 80%);
 }
 /* #app{
   width: 100%;
@@ -20,6 +21,14 @@ body{
   
 }
 
+.no-scrollbar {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
 
 
 
@@ -96,6 +105,19 @@ pointer-events: all; */
     color: white;
     font-size: 25px;
   
+}
+
+
+.customCursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  mix-blend-mode: difference; 
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: all 1s linear;
 }
 
 

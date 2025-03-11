@@ -12,7 +12,7 @@ export default{
     },
     data(){
 return{
-    resizeValue:50
+    resizeValue:70
 }
     },
     methods:{
@@ -23,17 +23,17 @@ return{
         },
         inc(){
             if(this.resizeValue<100){
-                this.resizeValue=this.resizeValue+25
+                this.resizeValue=this.resizeValue+10
             }  
         }  ,
         dec(){
-            if(this.resizeValue>50){
-                this.resizeValue=this.resizeValue-25
+            if(this.resizeValue>30){
+                this.resizeValue=this.resizeValue-10
             }
         },
         closeZoomImage(){
             this.$emit('cancel-image-zoom')
-            this.resizeValue=50
+            this.resizeValue=70
         }
     }
 }
@@ -46,16 +46,17 @@ return{
 <div v-show="!isVisible"  class="">
 
     <i @click="closeZoomImage" class="ri-close-large-line closeIconBtn"></i>
+    <div class="zoomSize">{{resizeValue}}%</div>
 
 <div @click.stop  @click="resizeImage" class="innerZoomContainer">
-
-    <img class="imgClass" :src="imageToZoom?.src?.original" :width="resizeValue + '%'"  style="max-width:75vw;"  />
+<div  style="max-width:75vw;overflow-y: auto;width: max-content;height: 90vh;position:relative"  class="no-scrollbar ">
+    <img class="imgClass" :src="imageToZoom?.src?.original" :width="resizeValue + '%'"    />
     <!-- :width="resizeValue + '%'" -->
-
+</div>
 
 
 </div>
-<div  class="flex itemsC justifyC resizeButtonContainer">
+<div  class="flex itemsC justifyC resizeButtonContainer" >
     <button @click="dec">-</button>
     <button @click="inc">+</button>
 </div>
@@ -78,7 +79,7 @@ return{
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    gap:10px;
+    gap:20px;
     /* cursor: zoom-in; */
 }
 
@@ -86,7 +87,10 @@ return{
 
 .imgClass{
     display: block;
-    margin:0 auto;
+    margin:auto auto;
+    /* position: absolute;
+    top:50%;
+    left: 50%; */
 }
 hidden{
     overflow: hidden;
@@ -98,5 +102,24 @@ hidden{
  } */
  
 
+ button{
+    cursor: pointer;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: none;
+ }
+
+ .zoomSize{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    /* background: red; */
+    cursor: pointer;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+ }
 
 </style>

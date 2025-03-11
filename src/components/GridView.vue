@@ -60,7 +60,7 @@ imageClicked(imgItem){
 <template>
 <div class="gridImageContainer justifyC itemsC"  :style="{display:viewType==1?'flex':'block', flexDirection: viewType == 1 ? 'column' : 'row' }">
   <!-- width="40%"  style="max-width: 400px; -->
-<img style="padding:2px 0px;" class="image" v-show="viewType!==2 && viewType!==3" v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)" :src="ele?.src?.original"   />
+<img style="padding:2px 0px;cursor: pointer;" class="image" v-show="viewType!==2 && viewType!==3" v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)" :src="ele?.src?.original"   />
 
 <!-- <div v-show="viewType===2" style=""  class="sliderButton w100 flex itemsC justifyB">
 <button @click="slideBack()" type="button"><i class="ri-arrow-left-wide-line"></i></button>
