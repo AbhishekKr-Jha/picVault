@@ -10,11 +10,11 @@ export default{
       viewType:Number
 
     },
-    data(){
-        return{
-            sliderImageValue:0
-        }
-    },
+    // data(){
+    //     return{
+    //         sliderImageValue:0
+    //     }
+    // },
     components:{
     //  ZoomView   
     },
@@ -22,26 +22,26 @@ export default{
 imageClicked(imgItem){
     this.$emit('image-clicked',imgItem)
 },
-slideFront(){
-    let photosArrayLength=this.imageData.photos.length-1
-  let newVal=this.sliderImageValue+1
-  if(photosArrayLength<newVal) {
-    this.sliderImageValue=0
-  }
-  else{
-    this.sliderImageValue= this.sliderImageValue+1 
-  }
-},
-slideBack(){
-    let photosArrayLength=this.imageData.photos.length-1
-  let newVal=this.sliderImageValue-1
-  if(newVal<0) {
-    this.sliderImageValue=photosArrayLength
-  }
-  else{
-    this.sliderImageValue= this.sliderImageValue-1
-  }
-}
+// slideFront(){
+//     let photosArrayLength=this.imageData.photos.length-1
+//   let newVal=this.sliderImageValue+1
+//   if(photosArrayLength<newVal) {
+//     this.sliderImageValue=0
+//   }
+//   else{
+//     this.sliderImageValue= this.sliderImageValue+1 
+//   }
+// },
+// slideBack(){
+//     let photosArrayLength=this.imageData.photos.length-1
+//   let newVal=this.sliderImageValue-1
+//   if(newVal<0) {
+//     this.sliderImageValue=photosArrayLength
+//   }
+//   else{
+//     this.sliderImageValue= this.sliderImageValue-1
+//   }
+// }
     },
     created(){
         console.log("the image type value",this.viewType)
@@ -58,39 +58,45 @@ slideBack(){
 
 
 <template>
-<div class="gridImageContainer"  :style="{ flexDirection: viewType == 1 ? 'column' : 'row' }">
-    
-<img v-show="viewType!==2 && viewType!==3" v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)" :src="ele?.src?.tiny"  />
+<div class="gridImageContainer justifyC itemsC"  :style="{display:viewType==1?'flex':'block', flexDirection: viewType == 1 ? 'column' : 'row' }">
+  <!-- width="40%"  style="max-width: 400px; -->
+<img style="padding:2px 0px;" class="image" v-show="viewType!==2 && viewType!==3" v-for="ele in imageData?.photos" :key="ele?.id" @click="imageClicked(ele)" :src="ele?.src?.original"   />
 
-.
-
-<div v-show="viewType===2"  class="sliderButton w100 flex itemsC justifyB">
+<!-- <div v-show="viewType===2" style=""  class="sliderButton w100 flex itemsC justifyB">
 <button @click="slideBack()" type="button"><i class="ri-arrow-left-wide-line"></i></button>
-<img :src="imageData?.photos[sliderImageValue]?.src?.original" width="50%" height="" >
+<img :src="imageData?.photos[sliderImageValue]?.src?.original" width="50%"  height="" >
 <button  @click="slideFront()" type="button"><i style="transform: rotate(180deg);" class="ri-arrow-left-wide-line"></i></button>
-</div>
+</div> -->
 
 <!-- {{ sliderImageValue }} -->
 
 </div>  
-
-
 </template>
 
 
 <style >
 .gridImageContainer{
-    column-width: 180px;
-    display: flex; 
+    column-width: 280px;
+    gap: 10px;
+    /* background: yellow; */
+    /* width: 100%; */
+    /* display: flex; 
      justify-content: center; 
-    align-items: center;flex-wrap: wrap; 
+    align-items: center;flex-wrap: wrap;  */
 }
 /* img{width: 100%;max-width: 800px;} */
-img{
+.image{
     border-radius: 12px;
-    padding: 5px 6px;
-}
-/* .sliderButton{
+    /* padding: 5px 6px; */
+    max-width:400px;
+    width: 100%;
 
+}
+img{
+  border-radius: 12px;
+  padding: 5px 6px;
+}
+/* .sliderImage{
+  max-width: 600px;
 } */
 </style>

@@ -5,7 +5,8 @@ export default{
     props:{
         imageToZoom:Object ,
         imageViewType:{
-            type:Number
+            type:Number,
+            isVisible:Boolean
         }
         
     },
@@ -42,9 +43,9 @@ return{
 
 <template>
 
-<div  class="">
+<div v-show="!isVisible"  class="">
 
-    <i @click="closeZoomImage" class="ri-close-large-line"></i>
+    <i @click="closeZoomImage" class="ri-close-large-line closeIconBtn"></i>
 
 <div @click.stop  @click="resizeImage" class="innerZoomContainer">
 
@@ -95,13 +96,7 @@ hidden{
  /* img{
     cursor: zoom-in;
  } */
-  i{
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    background: red;
-    cursor: pointer;
-  }
+ 
 
 
 </style>

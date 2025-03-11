@@ -80,7 +80,7 @@ deleteImage(id){
 
 </div>
 
-<Loader :isLoading="loader" />
+<!-- <Loader :isLoading="loader" /> -->
 
     </div>
 

@@ -3,6 +3,8 @@
  import ZoomView from  './components/ZoomView.vue'
  import UploadImage from  './components/UploadImage.vue'
  import InputBox from  './components/InputBox.vue'
+ import SliderView from  './components/SliderView.vue'
+ import Loader from  './components/Loader.vue'
 
 
 export default {
@@ -15,28 +17,36 @@ export default {
       zoomImageInfo:null,
       showMenuOption:false,
       imageViewType:JSON.parse(localStorage.getItem('thePage')) || 0,
-    
+    loader:true,
+    isInputActive:false
     };
   },
   components: {
     GridView,
     ZoomView,
     UploadImage,
-    InputBox
+    InputBox,
+    SliderView,
+    Loader
   },
   methods:{
-    async fetchImageList(query="lion"){
-      const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=10`, {
+    async fetchImageList(query="dragons"){
+
+this.loader=true
+
+      const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=30`, {
         headers: {
             Authorization: "eqLtGNKRE2qbMsqETmnrVI5NqRcUIG7bsf6UYUxASOiPNXLSyDLC0pkG"
         }
     });
+    this.loader=false
 if(response.status!==200) {
 alert("Image Fetching Error")
 return []
 }
 
     const data = await response.json();
+    this.toggleZoom=false  
     console.log(data)
     return data
 
@@ -55,10 +65,15 @@ this.imageViewType=viewType
 localStorage.setItem('thePage',JSON.parse(viewType))
 this.showMenu()
 console.log("the view type is now",viewType)
+    },
+   async handleImageInput(val){
+    console.log("thrbutton id clicked",val)
+      this.imageList=await this.fetchImageList(val)
+      this.imageViewType=0
     }
   },
   async created(){
-    // console.log("ok dom is crated")
+    console.log("ok dom is crated")
        this.imageList=await this.fetchImageList()
   }
 };
@@ -66,18 +81,31 @@ console.log("the view type is now",viewType)
 
 <template>
   <div class="container" :style="{ overflow: toggleZoom ? 'hidden' : 'auto'}">
-    <div style="margin: 10px 0;" class="">
-      <h1>PicVault</h1>
-    </div>
+    
+<div  v-show="!loader" style="width:100%;">
+  <div style="margin:10px 0px;" class="header">
+      <!-- <h1>PicVault</h1> -->
+       <img class="logo" src="./components/icons/image.png" width="200px"  />
+          </div>
 
 
-<div style="margin-top: 10px;" class="">
+<div style="margin-top: 10px;margin: 0 auto;" class="w100  flex justifyC itemsC">
 <GridView :imageData="imageList"  :viewType="imageViewType"  @image-clicked="zoomImageFunc"  />
 </div>
 <!-- @click="toggleZoom=false" -->
-<div v-show="toggleZoom"  class="zoomContainer" style="z-index: 100;">
-<ZoomView :imageToZoom="zoomImageInfo" @cancel-image-zoom="toggleZoom=false" />
+<div v-show="toggleZoom && !isInputActive"  class="zoomContainer" style="z-index: 100;">
+<ZoomView :imageToZoom="zoomImageInfo" @cancel-image-zoom="toggleZoom=false" :isVisible="isInputActive" />
 </div>
+
+<div v-show="toggleZoom && isInputActive"  class="zoomContainer" style="z-index: 100;">
+<InputBox  @image-input-value="handleImageInput" @close-input="toggleZoom=false,isInputActive=false" :isVisible="isInputActive"/>
+</div>
+
+<div @click="toggleZoom=true,isInputActive=true" class="searchIcon flex justifyC itemsC">
+  <i class="ri-search-line"></i>
+</div>
+
+<SliderView   :imageData="imageList"  :viewType="imageViewType" />
 
 
 <div v-show="imageViewType==3" class="">
@@ -88,6 +116,8 @@ console.log("the view type is now",viewType)
     <span v-show="!showMenuOption">Menu</span>
     <span v-show="showMenuOption"><i  class="ri-close-large-line" /></span>
     </div>
+
+
     <!-- <div @click="showMenu" class="menu">{{ !showMenuOption?"Menu": <i @click="closeZoomImage" class="ri-close-large-line"></i> }}</div> -->
 
 
@@ -103,13 +133,17 @@ console.log("the view type is now",viewType)
 <!-- <InputBox /> -->
 
   </div>
+  <div v-show="loader" class="w100">
+    <Loader />   
+  </div>
+</div>
 </template>
 
 <style>
 .menu {
   position: absolute;
-  top: 30px; 
-  right: 8%;  
+  top: 10px; 
+  right: 8%;
   background-color: black;
   color: white;
   width: 60px;
