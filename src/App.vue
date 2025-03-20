@@ -89,7 +89,7 @@ console.log("the view type is now",viewType)
   }
 };
 </script>
-
+  
 <template>
   <div @mousemove="updateCursor" class="container" :style="{ overflow: toggleZoom ? 'hidden' : 'auto'}">
     <!-- <CustomCursor /> -->

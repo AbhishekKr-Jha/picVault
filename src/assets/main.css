@@ -117,7 +117,7 @@ pointer-events: all; */
   mix-blend-mode: difference; 
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: all 1s linear;
+  transition: all 0.8s linear;
 }
 
 
