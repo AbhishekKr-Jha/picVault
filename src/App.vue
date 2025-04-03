@@ -5,6 +5,7 @@
  import InputBox from  './components/InputBox.vue'
  import SliderView from  './components/SliderView.vue'
  import Loader from  './components/Loader.vue'
+import Header from './components/Header.vue'
 //  import CustomCursor from  './components/CustomCursor.vue'
 
 
@@ -27,6 +28,7 @@ export default {
     };
   },
   components: {
+    Header,
     GridView,
     ZoomView,
     UploadImage,
@@ -44,7 +46,7 @@ export default {
 
 this.loader=true
 
-      const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=30`, {
+      const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=15`, {
         headers: {
             Authorization: "eqLtGNKRE2qbMsqETmnrVI5NqRcUIG7bsf6UYUxASOiPNXLSyDLC0pkG"
         }
@@ -59,8 +61,6 @@ return []
     this.toggleZoom=false  
     console.log(data)
     return data
-
-  
     },
     zoomImageFunc(zoomImageDetails){
       console.log("image is clicked")
@@ -91,18 +91,18 @@ console.log("the view type is now",viewType)
 </script>
   
 <template>
-  <div @mousemove="updateCursor" class="container" :style="{ overflow: toggleZoom ? 'hidden' : 'auto'}">
+  <div @mousemove="updateCursor" class="container" :style="{ overflow: toggleZoom ? 'hidden' : 'auto'}" style="padding-top: 20px;">
     <!-- <CustomCursor /> -->
-    <div class="customCursor" :style="{ top: cursorY + 'px', left: cursorX + 'px' }"></div>
+    <!-- <div class="customCursor" :style="{ top: cursorY + 'px', left: cursorX + 'px' }"></div> -->
     
 <div  v-show="!loader" style="width:100%;">
-  <div style="margin:10px 0px;" class="header">
-      <!-- <h1>PicVault</h1> -->
-<!-- --------------the logo has a width of 200px----------- -->
+
+  <div style="position: absolute; top: 10px;left:5px;z-index: 97;" class="header">
        <img @click="imageDisplayTypeFunc(0)" style="cursor: pointer;" class="logo" src="./components/icons/image.png" width="170px"  /> 
           </div>
 
-
+<Header @change_layout_btn_clicked="imageDisplayTypeFunc"/>
+  
 <div style="margin-top: 10px;margin: 0 auto;" class="w100  flex justifyC itemsC">
 <GridView :imageData="imageList"  :viewType="imageViewType"  @image-clicked="zoomImageFunc"  />
 </div>
@@ -128,10 +128,10 @@ console.log("the view type is now",viewType)
 
 
 
-    <div @click="showMenu" class="menu">
+    <!-- <div @click="showMenu" class="menu">
     <span v-show="!showMenuOption">Menu</span>
     <span v-show="showMenuOption"><i  class="ri-close-large-line" /></span>
-    </div>
+    </div> -->
 
 
     <!-- <div @click="showMenu" class="menu">{{ !showMenuOption?"Menu": <i @click="closeZoomImage" class="ri-close-large-line"></i> }}</div> -->
@@ -139,12 +139,12 @@ console.log("the view type is now",viewType)
 
 
 
-    <div :style="{right:showMenuOption?'10%':'-350px',}" class="menuBox flex flexC justifyC itemsC" :class="!showMenuOption && 'menuBox2'">
+    <!-- <div :style="{right:showMenuOption?'10%':'-350px',}" class="menuBox flex flexC justifyC itemsC" :class="!showMenuOption && 'menuBox2'">
 <div @click="imageDisplayTypeFunc(0)" :class="['menuItem',imageViewType==0?'selectedItem':'unSelectedItem']">Grid</div>
 <div @click="imageDisplayTypeFunc(1)" :class="['menuItem',imageViewType==1?'selectedItem':'unSelectedItem']">List</div>
 <div @click="imageDisplayTypeFunc(2)" :class="['menuItem',imageViewType==2?'selectedItem':'unSelectedItem']">Slider</div>
 <div @click="imageDisplayTypeFunc(3)" :class="['menuItem',imageViewType==3?'selectedItem':'unSelectedItem']">Upload</div>
-    </div>
+    </div> -->
 
 <!-- <InputBox /> -->
 

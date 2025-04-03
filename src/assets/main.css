@@ -1,4 +1,6 @@
-*{margin: 0;padding: 0;box-sizing: border-box;}
+
+
+*{margin: 0;padding: 0;box-sizing: border-box;}                                                                                                             
 
 body{
   overflow-x: hidden;
@@ -6,10 +8,11 @@ body{
   /* background: linear-gradient(45deg, white 30%, lightblue 70%, #00008B 80%); */
   background: linear-gradient(45deg,#00008B 10%, white 30%, lightblue 70%, #00008B 80%);
 }
-/* #app{
+#app{
   width: 100%;
-  overflow-x: hidden;
-} */
+  max-width: 1500px;
+  margin: 0 auto;
+}
 
 .container{
   width: 100%;
@@ -52,35 +55,9 @@ pointer-events: all; */
 
 
 
-/* button{
-  width: 30px;
-  height: 30px;
-  background: white;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  border-radius: 100%;
-  cursor: pointer;
-} */
 
 
-.sliderButton{
-  font-size: 35px;
- height: 60px;
- width: 60px;
-  border: none;
-  position: absolute;
-  top: 50%;
- transform: translateY(-50%) ; 
- border-radius: 100%;
- cursor: pointer;
-}
 
-.leftSliderButton{left: 2%;}
-.rightSliderButton{right: 2%;
-  transform: translateY(-50%) ; }
 
 .searchIcon{
   position: absolute;
@@ -125,6 +102,7 @@ pointer-events: all; */
 
 
 .flex{display: flex;}
+.flexR{flex-direction: row;}
 .flexC{flex-direction: column;}
 .justifyC{justify-content: center;}
 .justifyB{justify-content: space-between;}
@@ -133,6 +111,14 @@ pointer-events: all; */
 .wrap{flex-wrap: wrap;}
 
 
+
+
+@media (max-width: 650px) {
+
+  .logo{width: 30%;min-width: 120px;}  
+  .container{padding: 0 8px;}
+  
+  }
 
 
 @media (max-width: 600px) {
@@ -146,10 +132,5 @@ pointer-events: all; */
 }
 
 
-@media (max-width: 650px) {
 
-.logo{width: 30%;min-width: 120px;}  
-.container{padding: 0 8px;}
-
-}
 

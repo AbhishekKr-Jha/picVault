@@ -61,15 +61,17 @@ deleteImage(id){
 
 
 
-
-
 <template>
     <div v-show="!loader">
-      <input type="file" @change="uploadImage" accept=".jpeg, .jpg, .png">
+      <div style="margin-bottom: 50px;gap:15px;" class="w-100 flex flexC  justifyC itemsC ">
+      <input ref="fileInput" style="display: none;" type="file" @change="uploadImage" accept=".jpeg, .jpg, .png">
+    <span @click="$refs.fileInput.click()" class="upload-file-input"><i  class="ri-upload-cloud-2-line"></i></span>
+    <p style="font-size: 20px;font-weight: 500;">Please upload your file here.</p>
+    </div>
 
-<div style="margin: 20px 0;" class="flex wrap justifyC itemsC ">
-    <div v-for="(item,index) in imageUrls" :key="index" style="max-width: 400px;width:90%;position:relative;">
-        <img  :src="item" width="100%"  />
+<div style="margin: 20px 0;gap: 10px;width:100%;" class="flex wrap justifyC itemsC ">
+    <div v-for="(item,index) in imageUrls" :key="index" style="width: 380px;height:250px;position:relative;border-radius: 12px;overflow: hidden;" class="uploaded-image">
+        <img  :src="item" width="100%" height="100%" style="object-fit: cover;" />
         <i @click="deleteImage(index)" class="ri-delete-bin-6-line deleteIcon"></i>
 
     </div>
@@ -97,7 +99,6 @@ deleteImage(id){
         border-radius: 100%;
         width: 35px;height: 35px;
         display: flex;justify-content: center;align-items: center;
-        /* padding: 5px; */
         cursor: pointer;
     }
     
