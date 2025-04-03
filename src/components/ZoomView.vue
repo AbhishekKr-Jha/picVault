@@ -43,13 +43,13 @@ return{
 
 <template>
 
-<div v-show="!isVisible"  class="">
+<div v-show="!isVisible" style="height: 100%;"  class="w-100 flex justifyC itemsC ">
 
     <i @click="closeZoomImage" class="ri-close-large-line closeIconBtn"></i>
     <div class="zoomSize">{{resizeValue}}%</div>
 
 <div @click.stop  @click="resizeImage" class="innerZoomContainer">
-<div  style="max-width:75vw;overflow-y: auto;width: max-content;height: 90vh;position:relative"  class="no-scrollbar ">
+<div  style="max-width:75vw;overflow-y: auto;width: max-content;height: 90vh;position:relative"  class="no-scrollbar flex justifyC itemsC">
     <img class="imgClass" :src="imageToZoom?.src?.original" :width="resizeValue + '%'"    />
     <!-- :width="resizeValue + '%'" -->
 </div>
