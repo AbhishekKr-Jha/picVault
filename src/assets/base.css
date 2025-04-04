@@ -3,7 +3,7 @@
     /* height: 50px; */
     max-width: 600px;
     background-color: #63636397;
-    position: absolute;
+    position: fixed;
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
@@ -63,6 +63,7 @@ background-color: white;
 
 @media (max-width: 700px) {
     .headerContainer {
+        /* position: fixed; */
         bottom: 50px;
         width: 95%;
         max-width: 550;
